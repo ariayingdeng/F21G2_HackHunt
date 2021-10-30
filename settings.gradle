@@ -1,0 +1,2 @@
+rootProject.name = "F21G2_HackHunt"
+include ':app'
