@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">F21G2_HackHunt</string>
+    <string name="logoImgDesc">logo image</string>
+    <string name="nameEditTexthint">User Name</string>
+    <string name="passwordEditTextHint">Password</string>
+    <string name="btnLoginText">Log In</string>
+    <string name="or">OR</string>
+    <string name="btnSignupText">Sign Up</string>
 </resources>
