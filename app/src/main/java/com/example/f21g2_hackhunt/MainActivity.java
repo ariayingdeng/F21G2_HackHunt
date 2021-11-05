@@ -2,6 +2,7 @@ package com.example.f21g2_hackhunt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,21 +18,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ParseObject parseObject = new ParseObject("Test");
-        parseObject.put("Firstname", "Ying");
-        parseObject.put("Lastname", "Deng");
-        parseObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.i("Connection", "Successful");
-                }
-                else {
-                    Log.i("Connection", "Unsuccessful");
-                    e.printStackTrace();
-                }
-            }
-        });
+//        ParseObject parseObject = new ParseObject("Test");
+//        parseObject.put("Firstname", "Ying");
+//        parseObject.put("Lastname", "Deng");
+//        parseObject.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    Log.i("Connection", "Successful");
+//                }
+//                else {
+//                    Log.i("Connection", "Unsuccessful");
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
