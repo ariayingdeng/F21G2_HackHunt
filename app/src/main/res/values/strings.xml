@@ -6,4 +6,5 @@
     <string name="btnLoginText">Log In</string>
     <string name="or">OR</string>
     <string name="btnSignupText">Sign Up</string>
+    <string name="txtTitle">Makes your life so much easier!</string>
 </resources>
