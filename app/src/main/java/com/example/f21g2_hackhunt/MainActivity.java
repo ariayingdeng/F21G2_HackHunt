@@ -1,6 +1,7 @@
 package com.example.f21g2_hackhunt;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setLogo(R.drawable.hack_hunt_logo);
+        actionBar.setTitle("Hack Hunt");
 
 //        ParseObject parseObject = new ParseObject("Test");
 //        parseObject.put("Firstname", "Ying");
