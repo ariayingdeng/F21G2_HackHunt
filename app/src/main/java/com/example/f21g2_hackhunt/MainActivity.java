@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        //startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
@@ -61,12 +61,15 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.homepage:
                 Log.i("Selected", "Homepage");
+                // to start viewing feeds activity
                 return true;
             case R.id.newPost:
                 Log.i("Selected", "New Post");
+                // to start new post activity
                 return true;
             case R.id.yourPosts:
                 Log.i("Selected", "Your Posts");
+                startActivity(new Intent(MainActivity.this, UserPostsActivity.class));
                 return true;
             case R.id.profile:
                 Log.i("Selected", "Edit Profile");
