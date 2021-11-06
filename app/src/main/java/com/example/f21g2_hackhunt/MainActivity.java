@@ -12,10 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.newPost:
                 Log.i("Selected", "New Post");
-                // to start new post activity
+                startActivity(new Intent(MainActivity.this, NewPostActivity.class));
                 return true;
             case R.id.yourPosts:
                 Log.i("Selected", "Your Posts");
