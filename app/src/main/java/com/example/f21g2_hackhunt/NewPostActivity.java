@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +31,7 @@ public class NewPostActivity extends AppCompatActivity {
     ImageView imgViewPick;
     ActivityResultLauncher<Intent> activityResultLauncher;
     Button btnPost;
-    EditText words;
+    EditText inputCaptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class NewPostActivity extends AppCompatActivity {
 
         imgViewPick = findViewById(R.id.imgViewPick);
         imgViewPick.setImageResource(R.drawable.ic_addicon);
-        words = findViewById(R.id.editTextLines);
+        inputCaptions = findViewById(R.id.editTextCaptions);
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
@@ -68,19 +67,18 @@ public class NewPostActivity extends AppCompatActivity {
 
         btnPost = findViewById(R.id.btnPost);
         btnPost.setOnClickListener((View view) ->{
-            String lines = words.getText().toString();
-            // parse upload Image ??
-            BitmapDrawable bitmap = (BitmapDrawable) imgViewPick.getDrawable();
-            Bitmap bm = bitmap.getBitmap();
+            String caption = inputCaptions.getText().toString();
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) imgViewPick.getDrawable();
+            Bitmap bitmap = bitmapDrawable.getBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.PNG,100,stream);
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
             byte[] byteArray = stream.toByteArray();
             ParseFile file = new ParseFile("image.png",byteArray);
             String currentUsername = ParseUser.getCurrentUser().getUsername();
             ParseObject object = new ParseObject("Post");
             object.put("username", currentUsername);
             object.put("image",file);
-            object.put("caption",lines);
+            object.put("caption",caption);
             object.saveInBackground(new SaveCallback(){
                 @Override
                 public void done(ParseException e) {
@@ -91,7 +89,6 @@ public class NewPostActivity extends AppCompatActivity {
                     }
                 }
             });
-
             startActivity(new Intent(NewPostActivity.this,UserPostsActivity.class));
         });
 
