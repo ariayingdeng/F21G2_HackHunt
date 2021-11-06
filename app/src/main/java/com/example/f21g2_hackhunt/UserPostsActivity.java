@@ -3,6 +3,7 @@ package com.example.f21g2_hackhunt;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,6 +42,9 @@ public class UserPostsActivity extends AppCompatActivity {
             String currentUsername = ParseUser.getCurrentUser().getUsername();
             String title = currentUsername + "\'s Page";
             txtViewUsername.setText(title);
+        }
+        else {
+            startActivity(new Intent(UserPostsActivity.this,LoginActivity.class));
         }
 
         listViewPosts.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
