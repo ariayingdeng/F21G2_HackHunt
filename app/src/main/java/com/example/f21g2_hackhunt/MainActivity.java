@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.parse.ParseAnalytics;
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
