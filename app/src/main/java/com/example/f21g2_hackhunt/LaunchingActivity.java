@@ -18,7 +18,7 @@ public class LaunchingActivity extends AppCompatActivity {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(LaunchingActivity.this, MainActivity.class));
+                startActivity(new Intent(LaunchingActivity.this, LoginActivity.class));
                 finish();
             }
         };
