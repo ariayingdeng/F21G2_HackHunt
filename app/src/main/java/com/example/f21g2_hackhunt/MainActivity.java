@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
     }
