@@ -15,7 +15,7 @@
         android:theme="@style/Theme.F21G2_HackHunt"
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable">
-        <activity android:name=".UserPostsActivity"  android:parentActivityName=".UserPostsActivity"></activity>
+        <activity android:name=".UserPostsActivity"  android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".LaunchingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
