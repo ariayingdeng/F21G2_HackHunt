@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import com.parse.ParseAnalytics;
+import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,18 +58,23 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.homepage:
                 Log.i("Selected", "Homepage");
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 return true;
             case R.id.newPost:
                 Log.i("Selected", "New Post");
-                startActivity(new Intent(MainActivity.this, NewPostActivity.class));
+                startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
                 return true;
             case R.id.yourPosts:
                 Log.i("Selected", "Your Posts");
-                startActivity(new Intent(MainActivity.this, UserPostsActivity.class));
+                startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
                 return true;
             case R.id.profile:
                 Log.i("Selected", "Edit Profile");
+                return true;
+            case R.id.logout:
+                Log.i("Selected", "Log Out");
+                ParseUser.logOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 return true;
             default:
                 return false;

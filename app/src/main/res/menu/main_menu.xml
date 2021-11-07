@@ -4,5 +4,6 @@
     <item android:title="New Post" android:id="@+id/newPost"/>
     <item android:title="Your Posts" android:id="@+id/yourPosts"/>
     <item android:title="Edit Profile" android:id="@+id/profile"/>
+    <item android:title="Log Out" android:id="@+id/logout"/>
 
 </menu>

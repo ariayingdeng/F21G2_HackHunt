@@ -15,6 +15,8 @@ public class LaunchingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launching);
 
+        setTitle("Hack Hunt");
+
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
