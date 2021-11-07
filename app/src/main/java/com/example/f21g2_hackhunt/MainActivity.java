@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.parse.ParseAnalytics;
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
