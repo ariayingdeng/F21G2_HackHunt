@@ -61,7 +61,6 @@ public class UserPostsActivity extends MainActivity {
                             public void done(byte[] data, ParseException e) {
                                 if (e == null && data != null) {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                    currentBitmap = bitmap;
                                     View post = getLayoutInflater().inflate(R.layout.layout_post, null, false);
                                     post.setLayoutParams(new ViewGroup.LayoutParams(
                                             ViewGroup.LayoutParams.MATCH_PARENT, 250
@@ -73,7 +72,7 @@ public class UserPostsActivity extends MainActivity {
                                     TextView txtViewCaption = post.findViewById(R.id.txtViewCaption);
 
                                     String caption = (String) object.get("caption");
-                                    String date = "Test Date";
+                                    String date = (String) object.get("timestamp");
                                     imagePost.setImageBitmap(bitmap);
                                     txtViewDate.setText(date);
                                     txtViewCaption.setText(caption);
@@ -83,7 +82,8 @@ public class UserPostsActivity extends MainActivity {
                                     post.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            Log.i("Click", data.toString());
+                                            Log.i("Click", date);
+                                            currentBitmap = bitmap;
                                             Intent myPost = new Intent(UserPostsActivity.this, ViewPostActivity.class);
                                             Bundle bundle = new Bundle();
                                             bundle.putString("DATE", date);
