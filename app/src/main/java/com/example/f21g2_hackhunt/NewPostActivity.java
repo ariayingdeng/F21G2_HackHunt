@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,6 +26,9 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
+import java.security.PublicKey;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class NewPostActivity extends MainActivity {
 
@@ -56,6 +60,8 @@ public class NewPostActivity extends MainActivity {
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             activityResultLauncher.launch(intent);
+
+
         });
 
         btnPost = findViewById(R.id.btnPost);
@@ -68,7 +74,11 @@ public class NewPostActivity extends MainActivity {
             byte[] byteArray = stream.toByteArray();
             ParseFile file = new ParseFile("image.png",byteArray);
             String currentUsername = ParseUser.getCurrentUser().getUsername();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy h:mm a");
+            Calendar calendar = Calendar.getInstance() ;
+            String date = dateFormat.format(calendar.getTime());
             ParseObject object = new ParseObject("Post");
+            object.put("timestamp",date);
             object.put("username", currentUsername);
             object.put("image",file);
             object.put("caption",caption);
