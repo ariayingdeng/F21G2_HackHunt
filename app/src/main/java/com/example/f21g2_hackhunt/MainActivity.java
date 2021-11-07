@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setLogo(R.drawable.hack_hunt_logo);
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.homepage:
                 Log.i("Selected", "Homepage");
-                // to start viewing feeds activity
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
                 return true;
             case R.id.newPost:
                 Log.i("Selected", "New Post");

@@ -26,7 +26,7 @@ import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 
-public class NewPostActivity extends AppCompatActivity {
+public class NewPostActivity extends MainActivity {
 
     ImageView imgViewPick;
     ActivityResultLauncher<Intent> activityResultLauncher;
@@ -37,13 +37,6 @@ public class NewPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setLogo(R.drawable.hack_hunt_logo);
-        actionBar.setTitle("Hack Hunt");
 
         imgViewPick = findViewById(R.id.imgViewPick);
         imgViewPick.setImageResource(R.drawable.ic_addicon);

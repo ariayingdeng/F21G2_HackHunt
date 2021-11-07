@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable">
         <activity
+            android:name=".ViewPostActivity"
+            android:parentActivityName=".UserPostsActivity"></activity>
+        <activity
             android:name=".NewPostActivity"
             android:parentActivityName=".MainActivity" />
         <activity
