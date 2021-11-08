@@ -11,11 +11,22 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+}
 
 allprojects {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
