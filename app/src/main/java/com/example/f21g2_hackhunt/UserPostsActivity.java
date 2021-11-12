@@ -69,7 +69,7 @@ public class UserPostsActivity extends MainActivity {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                                     View post = getLayoutInflater().inflate(R.layout.layout_post, null, false);
                                     post.setLayoutParams(new ViewGroup.LayoutParams(
-                                            ViewGroup.LayoutParams.MATCH_PARENT, 800
+                                            ViewGroup.LayoutParams.MATCH_PARENT, 400
                                     ));
                                     post.setPadding(0,10,0,10);
                                     ImageView imagePost = post.findViewById(R.id.imgViewPost);
@@ -77,8 +77,9 @@ public class UserPostsActivity extends MainActivity {
                                     TextView txtViewCaption = post.findViewById(R.id.txtViewCaption);
                                     String caption = (String) object.get("caption");
                                     String date = (String) object.get("timestamp");
+                                    String simpleDate = date.substring(0, 5);
                                     imagePost.setImageBitmap(bitmap);
-                                    txtViewDate.setText(date);
+                                    txtViewDate.setText(simpleDate);
                                     txtViewCaption.setText(caption);
                                     layoutPosts.addView(post);
                                     post.setClickable(true);
