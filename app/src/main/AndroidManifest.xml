@@ -15,15 +15,25 @@
         android:theme="@style/Theme.F21G2_HackHunt"
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable">
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".StarterApplication" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".ViewPostActivity"
+            android:parentActivityName=".UserPostsActivity"></activity>
+        <activity
+            android:name=".NewPostActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".UserPostsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".LaunchingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".StarterApplication" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

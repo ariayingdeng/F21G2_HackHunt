@@ -6,4 +6,9 @@
     <string name="btnLoginText">Log In</string>
     <string name="or">OR</string>
     <string name="btnSignupText">Sign Up</string>
+    <string name="txtTitle">Makes your life so much easier!</string>
+    <string name="txtCreatePost">CREATE A NEW POST</string>
+    <string name="txtHint">What\'s Your Hack ?</string>
+    <string name="txtPost">Post</string>
+    <string name="postImgDesc">large post image</string>
 </resources>
