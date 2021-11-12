@@ -75,6 +75,7 @@ public class NewPostActivity extends MainActivity {
             object.put("username", currentUsername);
             object.put("image",file);
             object.put("caption",caption);
+
             object.saveInBackground(new SaveCallback(){
                 @Override
                 public void done(ParseException e) {
