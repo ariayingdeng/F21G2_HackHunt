@@ -9,13 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
+import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRole;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -31,9 +35,9 @@ public class UserPostsActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_posts);
 
-
         txtViewUsername = findViewById(R.id.txtViewUsername);
         layoutPosts = findViewById(R.id.layoutPosts);
+
 
         if (ParseUser.getCurrentUser() != null) {
             currentUsername = ParseUser.getCurrentUser().getUsername();
@@ -48,8 +52,10 @@ public class UserPostsActivity extends MainActivity {
 
     private void getUserPosts() {
         ParseQuery<ParseObject> query = new ParseQuery("Post");
-        query.whereEqualTo("username", currentUsername);
-        query.orderByDescending("createdAt");
+//        query.whereEqualTo("username", currentUsername);
+        query.whereContains("username", currentUsername);
+        query.orderByAscending("updatedAt");
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
@@ -63,14 +69,12 @@ public class UserPostsActivity extends MainActivity {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                                     View post = getLayoutInflater().inflate(R.layout.layout_post, null, false);
                                     post.setLayoutParams(new ViewGroup.LayoutParams(
-                                            ViewGroup.LayoutParams.MATCH_PARENT, 250
+                                            ViewGroup.LayoutParams.MATCH_PARENT, 800
                                     ));
                                     post.setPadding(0,10,0,10);
-
                                     ImageView imagePost = post.findViewById(R.id.imgViewPost);
                                     TextView txtViewDate = post.findViewById(R.id.txtViewDate);
                                     TextView txtViewCaption = post.findViewById(R.id.txtViewCaption);
-
                                     String caption = (String) object.get("caption");
                                     String date = (String) object.get("timestamp");
                                     imagePost.setImageBitmap(bitmap);
