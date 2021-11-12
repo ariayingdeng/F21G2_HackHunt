@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.i("Sign up", "Successful");
+                        Toast.makeText(LoginActivity.this, "Sign up successfully! Please log in now!", Toast.LENGTH_LONG).show();
                     }
                     else {
                         Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
