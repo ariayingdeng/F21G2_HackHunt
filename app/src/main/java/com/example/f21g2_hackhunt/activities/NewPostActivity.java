@@ -1,4 +1,4 @@
-package com.example.f21g2_hackhunt;
+package com.example.f21g2_hackhunt.activities;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.f21g2_hackhunt.R;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -86,7 +88,7 @@ public class NewPostActivity extends MainActivity {
                     }
                 }
             });
-            startActivity(new Intent(NewPostActivity.this,UserPostsActivity.class));
+            startActivity(new Intent(NewPostActivity.this, UserPostsActivity.class));
         });
 
     }

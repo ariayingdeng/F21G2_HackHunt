@@ -1,9 +1,12 @@
-package com.example.f21g2_hackhunt;
+package com.example.f21g2_hackhunt.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.f21g2_hackhunt.R;
+import com.example.f21g2_hackhunt.activities.UserPostsActivity;
 
 public class ViewPostActivity extends UserPostsActivity {
 

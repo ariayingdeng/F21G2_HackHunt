@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAD9CF"
-    tools:context=".UserPostsActivity">
+    tools:context=".activities.UserPostsActivity">
 
     <TextView
         android:id="@+id/txtViewUsername"

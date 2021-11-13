@@ -1,4 +1,4 @@
-package com.example.f21g2_hackhunt;
+package com.example.f21g2_hackhunt.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.f21g2_hackhunt.R;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 

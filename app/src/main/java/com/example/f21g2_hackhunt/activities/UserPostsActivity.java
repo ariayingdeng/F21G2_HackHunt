@@ -1,4 +1,4 @@
-package com.example.f21g2_hackhunt;
+package com.example.f21g2_hackhunt.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,17 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.example.f21g2_hackhunt.R;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
-import com.parse.Parse;
-import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRole;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -46,7 +44,7 @@ public class UserPostsActivity extends MainActivity {
             getUserPosts();
         }
         else {
-            startActivity(new Intent(UserPostsActivity.this,LoginActivity.class));
+            startActivity(new Intent(UserPostsActivity.this, LoginActivity.class));
         }
     }
 
