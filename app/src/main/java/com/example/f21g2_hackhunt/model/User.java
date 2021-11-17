@@ -10,7 +10,7 @@ public class User {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "userid")
-    private String userId;
+    private int userId;
 
     @NonNull
     @ColumnInfo(name = "username")
@@ -33,11 +33,11 @@ public class User {
         this.email = email;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
