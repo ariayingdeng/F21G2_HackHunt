@@ -4,11 +4,16 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.f21g2_hackhunt.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -62,6 +69,9 @@ public class NewPostActivity extends MainActivity {
         btnPost = findViewById(R.id.btnPost);
         btnPost.setOnClickListener((View view) ->{
             String caption = inputCaptions.getText().toString();
+
+
+
             BitmapDrawable bitmapDrawable = (BitmapDrawable) imgViewPick.getDrawable();
             Bitmap bitmap = bitmapDrawable.getBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -89,6 +99,29 @@ public class NewPostActivity extends MainActivity {
                 }
             });
             startActivity(new Intent(NewPostActivity.this, UserPostsActivity.class));
+        });
+
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.bottomNav3);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        return true;
+                    case R.id.recommendation:
+                        return true;
+                    case R.id.myPost:
+                        startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
+                        return true;
+                    case R.id.newPost:
+                        startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
+                        return true;
+                    default:
+                        return false;
+                }
+            }
         });
 
     }
