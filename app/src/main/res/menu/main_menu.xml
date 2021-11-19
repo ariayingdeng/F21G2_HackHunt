@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Homepage" android:id="@+id/homepage"/>
-    <item android:title="New Post" android:id="@+id/newPost"/>
-    <item android:title="Your Posts" android:id="@+id/yourPosts"/>
     <item android:title="Edit Profile" android:id="@+id/profile"/>
     <item android:title="Log Out" android:id="@+id/logout"/>
 

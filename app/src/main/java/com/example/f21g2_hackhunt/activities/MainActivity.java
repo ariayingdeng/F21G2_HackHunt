@@ -87,18 +87,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
-            case R.id.homepage:
-                Log.i("Selected", "Homepage");
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                return true;
-            case R.id.newPost:
-                Log.i("Selected", "New Post");
-                startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
-                return true;
-            case R.id.yourPosts:
-                Log.i("Selected", "Your Posts");
-                startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
-                return true;
             case R.id.profile:
                 Log.i("Selected", "Edit Profile");
                 return true;
