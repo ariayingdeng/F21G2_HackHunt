@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewPostActivity">
+    tools:context=".activities.NewPostActivity">
 
     <ImageView
         android:id="@+id/imgViewPick"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
         android:layout_marginTop="16dp"
         android:background="#EDECEC"
         android:scaleType="fitXY"
@@ -35,7 +35,7 @@
     <EditText
         android:id="@+id/editTextCaptions"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
@@ -61,4 +61,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCaptions" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FF9800"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_nav" />
 </androidx.constraintlayout.widget.ConstraintLayout>

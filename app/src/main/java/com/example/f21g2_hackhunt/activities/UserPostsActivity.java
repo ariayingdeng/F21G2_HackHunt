@@ -1,25 +1,29 @@
-package com.example.f21g2_hackhunt;
+package com.example.f21g2_hackhunt.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import com.example.f21g2_hackhunt.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
-import com.parse.Parse;
-import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRole;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -46,15 +50,41 @@ public class UserPostsActivity extends MainActivity {
             getUserPosts();
         }
         else {
-            startActivity(new Intent(UserPostsActivity.this,LoginActivity.class));
+            startActivity(new Intent(UserPostsActivity.this, LoginActivity.class));
         }
+
+
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.bottomNav2);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        return true;
+                    case R.id.recommendation:
+                        return true;
+                    case R.id.myPost:
+                        startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
+                        return true;
+                    case R.id.newPost:
+                        startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+
     }
 
     private void getUserPosts() {
         ParseQuery<ParseObject> query = new ParseQuery("Post");
 //        query.whereEqualTo("username", currentUsername);
         query.whereContains("username", currentUsername);
-        query.orderByAscending("updatedAt");
+        query.orderByDescending("createdAt");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override

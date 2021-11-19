@@ -16,24 +16,24 @@
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable">
         <activity
-            android:name=".ViewPostActivity"
-            android:parentActivityName=".UserPostsActivity"></activity>
+            android:name=".activities.ViewPostActivity"
+            android:parentActivityName=".activities.UserPostsActivity"></activity>
         <activity
-            android:name=".NewPostActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".activities.NewPostActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".UserPostsActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".LaunchingActivity">
+            android:name=".activities.UserPostsActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.LaunchingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".StarterApplication" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activities.MainActivity" />
     </application>
 
 </manifest>

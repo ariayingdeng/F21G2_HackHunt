@@ -11,4 +11,6 @@
     <string name="txtHint">What\'s Your Hack ?</string>
     <string name="txtPost">Post</string>
     <string name="postImgDesc">large post image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

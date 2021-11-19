@@ -1,4 +1,4 @@
-package com.example.f21g2_hackhunt;
+package com.example.f21g2_hackhunt.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.f21g2_hackhunt.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -74,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.i("Sign up", "Successful");
+
                         Toast.makeText(LoginActivity.this, "Sign up successfully! Please log in now!", Toast.LENGTH_LONG).show();
                     }
                     else {
