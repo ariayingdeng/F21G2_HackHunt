@@ -1,37 +1,21 @@
 package com.example.f21g2_hackhunt.activities;
 
+import androidx.annotation.NonNull;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 
 import com.example.f21g2_hackhunt.R;
-import com.example.f21g2_hackhunt.activities.UserPostsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ViewPostActivity extends UserPostsActivity {
+public class RecommendationActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_post);
-
-        TextView txtViewDateL = findViewById(R.id.txtViewDateL);
-        ImageView imgViewPostL = findViewById(R.id.imgViewPostL);
-        TextView txtViewCapL = findViewById(R.id.txtViewCapL);
-
-        Intent intent = getIntent();
-        Bundle myBundle = intent.getExtras();
-        String caption = myBundle.getString("CAPTION","");
-        String date = myBundle.getString("DATE","");
-
-        imgViewPostL.setImageBitmap(UserPostsActivity.currentBitmap);
-        txtViewDateL.setText(date);
-        txtViewCapL.setText(caption);
+        setContentView(R.layout.activity_recommendation);
 
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottomNav5);
