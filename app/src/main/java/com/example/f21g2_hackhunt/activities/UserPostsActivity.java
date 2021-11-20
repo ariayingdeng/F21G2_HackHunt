@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.example.f21g2_hackhunt.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -84,7 +83,7 @@ public class UserPostsActivity extends MainActivity {
         ParseQuery<ParseObject> query = new ParseQuery("Post");
 //        query.whereEqualTo("username", currentUsername);
         query.whereContains("username", currentUsername);
-        query.orderByDescending("createdAt");
+        query.orderByDescending("timestamp");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -107,6 +106,7 @@ public class UserPostsActivity extends MainActivity {
                                     TextView txtViewCaption = post.findViewById(R.id.txtViewCaption);
                                     String caption = (String) object.get("caption");
                                     String date = (String) object.get("timestamp");
+                                    String postId = object.getObjectId();
                                     String simpleDate = date.substring(0, 5);
                                     imagePost.setImageBitmap(bitmap);
                                     txtViewDate.setText(simpleDate);
@@ -117,12 +117,14 @@ public class UserPostsActivity extends MainActivity {
                                     post.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+
                                             Log.i("Click", date);
                                             currentBitmap = bitmap;
                                             Intent myPost = new Intent(UserPostsActivity.this, ViewPostActivity.class);
                                             Bundle bundle = new Bundle();
                                             bundle.putString("DATE", date);
                                             bundle.putString("CAPTION", caption);
+                                            bundle.putString("postId", postId);
                                             myPost.putExtras(bundle);
                                             startActivity(myPost);
                                         }
