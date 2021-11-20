@@ -9,17 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
-import com.parse.Parse;
-import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRole;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -36,7 +32,7 @@ public class UserPostsActivity extends MainActivity {
         setContentView(R.layout.activity_user_posts);
 
         txtViewUsername = findViewById(R.id.txtViewUsername);
-        layoutPosts = findViewById(R.id.layoutPosts);
+        layoutPosts = findViewById(R.id.layoutHome);
 
 
         if (ParseUser.getCurrentUser() != null) {

@@ -1,14 +1,16 @@
 package com.example.f21g2_hackhunt;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.homepage:
                 Log.i("Selected", "Homepage");
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), HomePageActivity.class));
                 return true;
             case R.id.newPost:
                 Log.i("Selected", "New Post");
