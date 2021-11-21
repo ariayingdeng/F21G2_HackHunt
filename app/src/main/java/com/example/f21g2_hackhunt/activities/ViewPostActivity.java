@@ -2,19 +2,19 @@ package com.example.f21g2_hackhunt.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-//conflicts
+
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import android.view.MenuItem;
-//
+
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//
+
 import com.example.f21g2_hackhunt.adapters.CommentAdapter;
 
 
@@ -27,12 +27,11 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
-//
+
 import androidx.annotation.NonNull;
 
 import com.example.f21g2_hackhunt.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
+
 
 
 public class ViewPostActivity extends UserPostsActivity {
