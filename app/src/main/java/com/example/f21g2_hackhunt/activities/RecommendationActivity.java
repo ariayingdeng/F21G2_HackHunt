@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.f21g2_hackhunt.R;
 import com.example.f21g2_hackhunt.adapters.RecommendationAdapter;
@@ -64,24 +68,28 @@ public class RecommendationActivity extends MainActivity {
                 "Recommendations.db").build();
         RecommendationDao recommendDao = db.recommendationDao();
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-               try {
-                   recommendDao.insertRecommendationsList(recommendationList);
-                   List<Recommendation> dbHacks = recommendDao.getAllRecommendations();
-                   RecommendationAdapter recommendAdapter = new RecommendationAdapter(dbHacks);
-                   gridViewHacks.setAdapter(recommendAdapter);
-                   gridViewHacks.setNumColumns(2);
-                   gridViewHacks.setHorizontalSpacing(5);
-                   gridViewHacks.setVerticalSpacing(10);
-                   
-               }
-               catch (Exception ex) {
-                   Log.d("DBrecommend","Database exception occured: " + ex.getMessage());
-               }
+        executor.execute(() -> {
+           try {
+               recommendDao.insertRecommendationsList(recommendationList);
+               List<Recommendation> dbHacks = recommendDao.getAllRecommendations();
+               RecommendationAdapter recommendAdapter = new RecommendationAdapter(dbHacks);
+               gridViewHacks.setAdapter(recommendAdapter);
+               gridViewHacks.setNumColumns(2);
+               gridViewHacks.setHorizontalSpacing(5);
+               gridViewHacks.setVerticalSpacing(10);
 
-            }
+               gridViewHacks.setOnItemClickListener((AdapterView<?> adapterView, View view, int i, long l) -> {
+
+                   Toast.makeText(RecommendationActivity.this, "Enjoy the video now!", Toast.LENGTH_SHORT).show();
+                   String videoLink = dbHacks.get(i).getVideoLink();
+                   startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videoLink)));
+               });
+
+           }
+           catch (Exception ex) {
+               Log.d("DBrecommend","Database exception occurred: " + ex.getMessage());
+           }
+
         });
 
 
