@@ -1,4 +1,4 @@
-package com.example.f21g2_hackhunt.Adapter;
+package com.example.f21g2_hackhunt.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,9 +42,6 @@ public class CommentAdapter extends BaseAdapter {
         }
         TextView textViewCommenter = view.findViewById(R.id.textViewCommenter);
         TextView textViewComment = view.findViewById(R.id.textViewComment);
-
-        Log.d("DEBUG6", Commenters.get(i));
-        Log.d("DEBUG7", Comments.get(i));
         textViewCommenter.setText(Commenters.get(i));
         textViewComment.setText(Comments.get(i));
 

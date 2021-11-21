@@ -1,14 +1,10 @@
 package com.example.f21g2_hackhunt.activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 //conflicts
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import android.view.MenuItem;
@@ -19,34 +15,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //
-import com.example.f21g2_hackhunt.Adapter.CommentAdapter;
+import com.example.f21g2_hackhunt.adapters.CommentAdapter;
 
 
 import com.parse.FindCallback;
-import com.parse.GetDataCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 //
 import androidx.annotation.NonNull;
 
 import com.example.f21g2_hackhunt.R;
-import com.example.f21g2_hackhunt.activities.UserPostsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 
 public class ViewPostActivity extends UserPostsActivity {
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,31 +58,6 @@ public class ViewPostActivity extends UserPostsActivity {
         imgViewPostL.setImageBitmap(UserPostsActivity.currentBitmap);
         txtViewDateL.setText(date);
         txtViewCapL.setText(caption);
-      
-       BottomNavigationView bottomNavigationView;
-        bottomNavigationView = findViewById(R.id.bottomNav5);
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {            
-           @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        return true;
-                    case R.id.recommendation:
-                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
-                        return true;
-                    case R.id.myPost:
-                        startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
-                        return true;
-                    case R.id.newPost:
-                        startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
 
         commentPostButton.setImageResource(R.drawable.ic_commentarrow);
         parseQuery(postId);
@@ -141,14 +106,8 @@ public class ViewPostActivity extends UserPostsActivity {
                     for (ParseObject object : objects) {
                         String comment = (String) object.get("comments");
                         String commenter = (String) object.get("commenter");
-                        Log.d("DEBUG1", comment);
-                        Log.d("DEBUG2", commenter);
                         CommentsList.add(comment);
                         CommenterList.add(commenter);
-
-                        Log.d("DEBUG4", String.valueOf(CommentsList));
-                        Log.d("DEBUG5", String.valueOf(CommenterList));
-
                     }
                 }
                 CommentAdapter myCommentAdapter = new CommentAdapter(CommentsList,CommenterList);

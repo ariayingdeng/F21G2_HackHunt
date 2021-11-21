@@ -84,17 +84,11 @@ public class RecommendationActivity extends MainActivity {
                    String videoLink = dbHacks.get(i).getVideoLink();
                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videoLink)));
                });
-
            }
            catch (Exception ex) {
                Log.d("DBrecommend","Database exception occurred: " + ex.getMessage());
            }
-
         });
-
-
-
-
     }
 
     private void addRecommendData() {
