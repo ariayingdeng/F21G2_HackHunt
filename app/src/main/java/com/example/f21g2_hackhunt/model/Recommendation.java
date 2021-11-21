@@ -7,9 +7,10 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "recommendations")
 public class Recommendation {
-    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @PrimaryKey
     @ColumnInfo(name = "recommendid")
-    private int recommendId;
+    private String recommendId;
 
     @ColumnInfo(name = "description")
     private String description;
@@ -24,17 +25,18 @@ public class Recommendation {
 
     }
 
-    public Recommendation(String description, int pic, String videoLink) {
+    public Recommendation(@NonNull String recommendId, String description, int pic, String videoLink) {
+        this.recommendId = recommendId;
         this.description = description;
         this.pic = pic;
         this.videoLink = videoLink;
     }
 
-    public int getRecommendId() {
+    public String getRecommendId() {
         return recommendId;
     }
 
-    public void setRecommendId(int recommendId) {
+    public void setRecommendId(@NonNull String recommendId) {
         this.recommendId = recommendId;
     }
 
