@@ -116,6 +116,7 @@ public class NewPostActivity extends MainActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         return true;
                     case R.id.recommendation:
+                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
                         return true;
                     case R.id.myPost:
                         startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));

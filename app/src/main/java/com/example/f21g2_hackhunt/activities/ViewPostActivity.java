@@ -4,19 +4,24 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+//conflicts
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+
+import android.view.MenuItem;
+//
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//
 import com.example.f21g2_hackhunt.Adapter.CommentAdapter;
-import com.example.f21g2_hackhunt.R;
-import com.example.f21g2_hackhunt.activities.UserPostsActivity;
+
+
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -29,6 +34,14 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+//
+import androidx.annotation.NonNull;
+
+import com.example.f21g2_hackhunt.R;
+import com.example.f21g2_hackhunt.activities.UserPostsActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 
 public class ViewPostActivity extends UserPostsActivity {
 
@@ -55,6 +68,32 @@ public class ViewPostActivity extends UserPostsActivity {
         imgViewPostL.setImageBitmap(UserPostsActivity.currentBitmap);
         txtViewDateL.setText(date);
         txtViewCapL.setText(caption);
+      
+       BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.bottomNav5);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {            
+           @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        return true;
+                    case R.id.recommendation:
+                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
+                        return true;
+                    case R.id.myPost:
+                        startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
+                        return true;
+                    case R.id.newPost:
+                        startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+
         commentPostButton.setImageResource(R.drawable.ic_commentarrow);
         parseQuery(postId);
 

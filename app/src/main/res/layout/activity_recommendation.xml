@@ -4,46 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAD9CF"
-    tools:context=".activities.UserPostsActivity">
+    tools:context=".activities.RecommendationActivity">
 
     <TextView
-        android:id="@+id/txtViewUsername"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:background="#F4B4A0"
-        android:fontFamily="serif-monospace"
-        android:paddingLeft="50dp"
-        android:paddingTop="20dp"
-        android:textColor="#761687"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:id="@+id/txtViewRTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/recommendationTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scrollViewPosts"
+    <GridView
+        android:id="@+id/gridViewHacks"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="58dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewUsername"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-        <LinearLayout
-            android:id="@+id/layoutPosts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical"
-            android:padding="5dp"></LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/txtViewRTitle" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav5"
@@ -57,5 +48,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_nav" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

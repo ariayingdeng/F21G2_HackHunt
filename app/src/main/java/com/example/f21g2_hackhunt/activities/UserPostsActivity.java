@@ -54,7 +54,7 @@ public class UserPostsActivity extends MainActivity {
 
 
         BottomNavigationView bottomNavigationView;
-        bottomNavigationView = findViewById(R.id.bottomNav2);
+        bottomNavigationView = findViewById(R.id.bottomNav5);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -64,6 +64,7 @@ public class UserPostsActivity extends MainActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         return true;
                     case R.id.recommendation:
+                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
                         return true;
                     case R.id.myPost:
                         startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
