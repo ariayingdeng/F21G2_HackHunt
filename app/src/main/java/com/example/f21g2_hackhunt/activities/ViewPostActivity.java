@@ -36,7 +36,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 
 public class ViewPostActivity extends UserPostsActivity {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
