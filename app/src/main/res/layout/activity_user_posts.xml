@@ -11,7 +11,7 @@
         android:id="@+id/txtViewUsername"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:background="#FAAC93"
+        android:background="#F4B4A0"
         android:fontFamily="serif-monospace"
         android:paddingLeft="50dp"
         android:paddingTop="20dp"
@@ -33,7 +33,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewUsername"
-        tools:ignore="SpeakableTextPresentCheck">
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck" />
 
         <LinearLayout
             android:id="@+id/layoutPosts"
