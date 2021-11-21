@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.example.f21g2_hackhunt.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -55,7 +54,7 @@ public class UserPostsActivity extends MainActivity {
 
 
         BottomNavigationView bottomNavigationView;
-        bottomNavigationView = findViewById(R.id.bottomNav2);
+        bottomNavigationView = findViewById(R.id.bottomNav5);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -65,6 +64,7 @@ public class UserPostsActivity extends MainActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         return true;
                     case R.id.recommendation:
+                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
                         return true;
                     case R.id.myPost:
                         startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
