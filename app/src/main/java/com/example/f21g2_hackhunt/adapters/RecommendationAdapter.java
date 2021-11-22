@@ -52,8 +52,6 @@ public class RecommendationAdapter extends BaseAdapter {
             txtViewDesc.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
 
 
-
-
         }
         return convertView;
     }

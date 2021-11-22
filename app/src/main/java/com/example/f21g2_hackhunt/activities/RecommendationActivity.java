@@ -75,8 +75,8 @@ public class RecommendationActivity extends MainActivity {
                RecommendationAdapter recommendAdapter = new RecommendationAdapter(dbHacks);
                gridViewHacks.setAdapter(recommendAdapter);
                gridViewHacks.setNumColumns(2);
-               gridViewHacks.setHorizontalSpacing(5);
-               gridViewHacks.setVerticalSpacing(10);
+               gridViewHacks.setHorizontalSpacing(10);
+               gridViewHacks.setVerticalSpacing(15);
 
                gridViewHacks.setOnItemClickListener((AdapterView<?> adapterView, View view, int i, long l) -> {
 
