@@ -68,37 +68,42 @@ public class NewPostActivity extends MainActivity {
 
         btnPost = findViewById(R.id.btnPost);
         btnPost.setOnClickListener((View view) ->{
-            String caption = inputCaptions.getText().toString();
+            try{
+                String caption = inputCaptions.getText().toString();
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) imgViewPick.getDrawable();
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                ParseFile file = new ParseFile("image.png", byteArray);
+                String currentUsername = ParseUser.getCurrentUser().getUsername();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy h:mm a");
+                Calendar calendar = Calendar.getInstance();
+                String date = dateFormat.format(calendar.getTime());
+                ParseObject object = new ParseObject("Post");
+                object.put("timestamp", date);
+                object.put("username", currentUsername);
+                object.put("image", file);
+                object.put("caption", caption);
 
-
-
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) imgViewPick.getDrawable();
-            Bitmap bitmap = bitmapDrawable.getBitmap();
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
-            byte[] byteArray = stream.toByteArray();
-            ParseFile file = new ParseFile("image.png",byteArray);
-            String currentUsername = ParseUser.getCurrentUser().getUsername();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy h:mm a");
-            Calendar calendar = Calendar.getInstance() ;
-            String date = dateFormat.format(calendar.getTime());
-            ParseObject object = new ParseObject("Post");
-            object.put("timestamp",date);
-            object.put("username", currentUsername);
-            object.put("image",file);
-            object.put("caption",caption);
-
-            object.saveInBackground(new SaveCallback(){
-                @Override
-                public void done(ParseException e) {
-                    if(e == null){
-                        Toast.makeText(NewPostActivity.this,"Your post has been shared",Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(NewPostActivity.this,"Issue sharing your post",Toast.LENGTH_SHORT).show();
+                object.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(NewPostActivity.this, "Your post has been shared", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(NewPostActivity.this, "Issue sharing your post", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
-            startActivity(new Intent(NewPostActivity.this, UserPostsActivity.class));
+                });
+                startActivity(new Intent(NewPostActivity.this, UserPostsActivity.class));
+            }
+            catch(Exception e){
+                e.printStackTrace();
+                Toast.makeText(NewPostActivity.this, "Please Select A Picture And Input Your Caption To Post", Toast.LENGTH_SHORT).show();
+            }
+
+
         });
 
         BottomNavigationView bottomNavigationView;
@@ -111,6 +116,7 @@ public class NewPostActivity extends MainActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         return true;
                     case R.id.recommendation:
+                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
                         return true;
                     case R.id.myPost:
                         startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
