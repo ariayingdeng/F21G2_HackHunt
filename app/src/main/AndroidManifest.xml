@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable">
         <activity
+            android:name=".activities.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.RecommendationActivity"
             android:exported="false" />
         <activity
