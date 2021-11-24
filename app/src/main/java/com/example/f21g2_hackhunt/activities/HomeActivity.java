@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.f21g2_hackhunt.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -37,7 +42,34 @@ public class HomeActivity extends MainActivity {
         else {
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
         }
+
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.bottomNav5);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        return true;
+                    case R.id.recommendation:
+                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
+                        return true;
+                    case R.id.myPost:
+                        startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
+                        return true;
+                    case R.id.newPost:
+                        startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
+
+
 
     private void getHomePosts() {
         ParseQuery<ParseObject> query = new ParseQuery("Post");
