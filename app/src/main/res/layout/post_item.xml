@@ -48,17 +48,10 @@
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/like_image"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_like" />
-
-            <ImageView
                 android:id="@+id/comment_image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/like_image"
                 android:src="@drawable/ic_comment" />
 
             <TextView
@@ -71,15 +64,6 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/txtViewLikeNumbers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="0 likes"
-            android:textColor="@color/gray"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtViewUsernameBottom"
