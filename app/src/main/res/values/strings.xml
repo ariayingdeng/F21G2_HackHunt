@@ -16,4 +16,6 @@
     <string name="txtHint2">What do you want to say ?</string>
     <string name="txtComment">Comments</string>
     <string name="recommendationTitle">Life Hacks Show</string>
+    <string name="deletePostTxt">Delete</string>
+    <string name="editPostTxt">Edit</string>
 </resources>

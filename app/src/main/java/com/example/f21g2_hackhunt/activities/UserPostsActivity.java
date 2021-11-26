@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -82,7 +83,6 @@ public class UserPostsActivity extends MainActivity {
 
     private void getUserPosts() {
         ParseQuery<ParseObject> query = new ParseQuery("Post");
-//        query.whereEqualTo("username", currentUsername);
         query.whereContains("username", currentUsername);
         query.orderByDescending("timestamp");
 
@@ -105,9 +105,21 @@ public class UserPostsActivity extends MainActivity {
                                     ImageView imagePost = post.findViewById(R.id.imgViewPost);
                                     TextView txtViewDate = post.findViewById(R.id.txtViewDate);
                                     TextView txtViewCaption = post.findViewById(R.id.txtViewCaption);
+                                    TextView txtViewDelete = post.findViewById(R.id.deletePost);
+
+                                    String postId = object.getObjectId();
+                                    txtViewDelete.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            deleteComments(postId);
+                                            object.deleteInBackground();
+                                            Toast.makeText(UserPostsActivity.this,"Your post has been deleted successfully!", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(UserPostsActivity.this, UserPostsActivity.class));
+                                        }
+                                    });
+
                                     String caption = (String) object.get("caption");
                                     String date = (String) object.get("timestamp");
-                                    String postId = object.getObjectId();
                                     String simpleDate = date.substring(0, 5);
                                     imagePost.setImageBitmap(bitmap);
                                     txtViewDate.setText(simpleDate);
@@ -134,6 +146,21 @@ public class UserPostsActivity extends MainActivity {
                                 }
                             }
                         });
+                    }
+                }
+            }
+        });
+    }
+
+    public void deleteComments(String postId) {
+        ParseQuery<ParseObject> query = new ParseQuery("Comment");
+        query.whereEqualTo("postId",postId);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    for (ParseObject object : objects) {
+                        object.deleteInBackground();
                     }
                 }
             }

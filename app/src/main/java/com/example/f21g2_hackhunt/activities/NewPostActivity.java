@@ -91,6 +91,7 @@ public class NewPostActivity extends MainActivity {
                     public void done(ParseException e) {
                         if (e == null) {
                             Toast.makeText(NewPostActivity.this, "Your post has been shared", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(NewPostActivity.this, UserPostsActivity.class));
                         } else {
                             Toast.makeText(NewPostActivity.this, "Issue sharing your post", Toast.LENGTH_SHORT).show();
                         }
