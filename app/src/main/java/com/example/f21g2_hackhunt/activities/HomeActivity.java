@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,31 +25,23 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-public class UserPostsActivity extends MainActivity {
-    LinearLayout layoutPosts;
-    String currentUsername;
-    TextView txtViewUsername;
+public class HomeActivity extends MainActivity {
+    LinearLayout layoutHome;
     protected static Bitmap currentBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_posts);
+        setContentView(R.layout.activity_home_page);
 
-        txtViewUsername = findViewById(R.id.txtViewUsername);
-        layoutPosts = findViewById(R.id.layoutPosts);
-
+        layoutHome = findViewById(R.id.layoutHome);
 
         if (ParseUser.getCurrentUser() != null) {
-            currentUsername = ParseUser.getCurrentUser().getUsername();
-            String title = currentUsername + "\'s Page";
-            txtViewUsername.setText(title);
-            getUserPosts();
+            getHomePosts();
         }
         else {
-            startActivity(new Intent(UserPostsActivity.this, LoginActivity.class));
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
         }
-
 
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottomNav5);
@@ -77,14 +67,11 @@ public class UserPostsActivity extends MainActivity {
                 }
             }
         });
-
     }
 
-    private void getUserPosts() {
+    private void getHomePosts() {
         ParseQuery<ParseObject> query = new ParseQuery("Post");
-//        query.whereEqualTo("username", currentUsername);
-        query.whereContains("username", currentUsername);
-        query.orderByDescending("timestamp");
+        query.orderByAscending("updatedAt");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -97,39 +84,22 @@ public class UserPostsActivity extends MainActivity {
                             public void done(byte[] data, ParseException e) {
                                 if (e == null && data != null) {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                    View post = getLayoutInflater().inflate(R.layout.layout_post, null, false);
-                                    post.setLayoutParams(new ViewGroup.LayoutParams(
-                                            ViewGroup.LayoutParams.MATCH_PARENT, 400
-                                    ));
-                                    post.setPadding(0,10,0,10);
-                                    ImageView imagePost = post.findViewById(R.id.imgViewPost);
-                                    TextView txtViewDate = post.findViewById(R.id.txtViewDate);
-                                    TextView txtViewCaption = post.findViewById(R.id.txtViewCaption);
+                                    View post = getLayoutInflater().inflate(R.layout.post_item, null, false);
+                                    ImageView imagePost = post.findViewById(R.id.post_image);
+                                    TextView txtViewDate = post.findViewById(R.id.txtViewPostDate);
+                                    TextView txtViewCaption = post.findViewById(R.id.txtViewUserDescription);
+                                    TextView txtUsernameTop = post.findViewById(R.id.txtViewUsernameTop);
+                                    TextView txtUsernameBottom = post.findViewById(R.id.txtViewUsernameBottom);
+                                    String userName = (String) object.get("username");
                                     String caption = (String) object.get("caption");
                                     String date = (String) object.get("timestamp");
-                                    String postId = object.getObjectId();
                                     String simpleDate = date.substring(0, 5);
+                                    txtUsernameTop.setText(userName);
+                                    txtUsernameBottom.setText(userName);
                                     imagePost.setImageBitmap(bitmap);
                                     txtViewDate.setText(simpleDate);
                                     txtViewCaption.setText(caption);
-                                    layoutPosts.addView(post);
-                                    post.setClickable(true);
-
-                                    post.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-
-                                            Log.i("Click", date);
-                                            currentBitmap = bitmap;
-                                            Intent myPost = new Intent(UserPostsActivity.this, ViewPostActivity.class);
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString("DATE", date);
-                                            bundle.putString("CAPTION", caption);
-                                            bundle.putString("postId", postId);
-                                            myPost.putExtras(bundle);
-                                            startActivity(myPost);
-                                        }
-                                    });
+                                    layoutHome.addView(post);
 
                                 }
                             }
