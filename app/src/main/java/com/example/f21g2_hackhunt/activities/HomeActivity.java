@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,9 +26,8 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-public class HomeActivity extends MainActivity {
+public class HomeActivity extends UserPostsActivity {
     LinearLayout layoutHome;
-    protected static Bitmap currentBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,7 @@ public class HomeActivity extends MainActivity {
                                     String userName = (String) object.get("username");
                                     String caption = (String) object.get("caption");
                                     String date = (String) object.get("timestamp");
+                                    String postId = object.getObjectId();
                                     String simpleDate = date.substring(0, 5);
                                     txtUsernameTop.setText(userName);
                                     txtUsernameBottom.setText(userName);
@@ -100,6 +101,21 @@ public class HomeActivity extends MainActivity {
                                     txtViewDate.setText(simpleDate);
                                     txtViewCaption.setText(caption);
                                     layoutHome.addView(post);
+
+                                    post.setClickable(true);
+                                    post.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent myPost = new Intent(HomeActivity.this, ViewPostActivity.class);
+                                            currentBitmap = bitmap;
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("DATE", date);
+                                            bundle.putString("CAPTION", caption);
+                                            bundle.putString("postId", postId);
+                                            myPost.putExtras(bundle);
+                                            startActivity(myPost);
+                                        }
+                                    });
 
                                 }
                             }
