@@ -33,7 +33,7 @@
             android:parentActivityName=".activities.UserPostsActivity" />
         <activity
             android:name=".activities.UserPostsActivity"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.HomeActivity" />
         <activity android:name=".activities.LaunchingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

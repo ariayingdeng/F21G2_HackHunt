@@ -21,5 +21,7 @@
     <string name="txtEditProfileTitle">You May Update Your Personal Information In The Columns Below</string>
     <string name="deletePostTxt">Delete</string>
     <string name="editPostTxt">Edit</string>
+    <string name="editCaptionHint">Write a caption...</string>
+    <string name="saveCaption">Save</string>
 
 </resources>

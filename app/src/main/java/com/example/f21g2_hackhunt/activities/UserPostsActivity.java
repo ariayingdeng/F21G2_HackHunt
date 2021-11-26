@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.example.f21g2_hackhunt.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -99,15 +101,19 @@ public class UserPostsActivity extends MainActivity {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                                     View post = getLayoutInflater().inflate(R.layout.layout_post, null, false);
                                     post.setLayoutParams(new ViewGroup.LayoutParams(
-                                            ViewGroup.LayoutParams.MATCH_PARENT, 400
+                                            ViewGroup.LayoutParams.MATCH_PARENT, 500
                                     ));
                                     post.setPadding(0,10,0,10);
                                     ImageView imagePost = post.findViewById(R.id.imgViewPost);
                                     TextView txtViewDate = post.findViewById(R.id.txtViewDate);
                                     TextView txtViewCaption = post.findViewById(R.id.txtViewCaption);
                                     TextView txtViewDelete = post.findViewById(R.id.deletePost);
+                                    TextView txtViewEdit = post.findViewById(R.id.editPost);
+                                    EditText editTxtCaption = post.findViewById(R.id.editTxtCaption);
+                                    TextView txtViewSave = post.findViewById(R.id.savePost);
 
                                     String postId = object.getObjectId();
+
                                     txtViewDelete.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -118,6 +124,26 @@ public class UserPostsActivity extends MainActivity {
                                         }
                                     });
 
+                                    txtViewEdit.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            editTxtCaption.setVisibility(View.VISIBLE);
+                                            txtViewSave.setVisibility(View.VISIBLE);
+                                        }
+                                    });
+
+                                    txtViewSave.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            String newCaption = editTxtCaption.getText().toString();
+                                            txtViewCaption.setText(newCaption);
+                                            editPostCaption(postId, newCaption);
+                                            Toast.makeText(UserPostsActivity.this,"Your post has been updated successfully!", Toast.LENGTH_SHORT).show();
+                                            editTxtCaption.setVisibility(View.INVISIBLE);
+                                            txtViewSave.setVisibility(View.INVISIBLE);
+                                        }
+                                    });
+
                                     String caption = (String) object.get("caption");
                                     String date = (String) object.get("timestamp");
                                     String simpleDate = date.substring(0, 5);
@@ -125,6 +151,7 @@ public class UserPostsActivity extends MainActivity {
                                     txtViewDate.setText(simpleDate);
                                     txtViewCaption.setText(caption);
                                     layoutPosts.addView(post);
+
                                     post.setClickable(true);
 
                                     post.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +169,6 @@ public class UserPostsActivity extends MainActivity {
                                             startActivity(myPost);
                                         }
                                     });
-
                                 }
                             }
                         });
@@ -162,6 +188,18 @@ public class UserPostsActivity extends MainActivity {
                     for (ParseObject object : objects) {
                         object.deleteInBackground();
                     }
+                }
+            }
+        });
+    }
+
+    public void editPostCaption(String postId, String newCaption) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
+        query.getInBackground(postId, new GetCallback<ParseObject>() {
+            public void done(ParseObject ePost, ParseException e) {
+                if (e == null) {
+                    ePost.put("caption", newCaption);
+                    ePost.saveInBackground();
                 }
             }
         });
