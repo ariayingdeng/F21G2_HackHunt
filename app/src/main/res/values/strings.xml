@@ -11,11 +11,17 @@
     <string name="txtHint">What\'s Your Hack ?</string>
     <string name="txtPost">Post</string>
     <string name="postImgDesc">large post image</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtHint2">What do you want to say ?</string>
     <string name="txtComment">Comments</string>
     <string name="recommendationTitle">Life Hacks Show</string>
+    <string name="txtHintUsername">Please Input New Username</string>
+    <string name="txtHintPassword">Please Input New Password</string>
+    <string name="txtHintEmailAddress">Please Input New Email Address</string>
+    <string name="txtEditProfileTitle">You May Update Your Personal Information In The Columns Below</string>
     <string name="deletePostTxt">Delete</string>
     <string name="editPostTxt">Edit</string>
+    <string name="editCaptionHint">Write a caption...</string>
+    <string name="saveCaption">Save</string>
+
 </resources>

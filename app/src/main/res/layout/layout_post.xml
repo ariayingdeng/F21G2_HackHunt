@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/margin"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="180dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,6 +37,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:text="TextView" />
+
+            <EditText
+                android:id="@+id/editTxtCaption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/editCaptionHint"
+                android:inputType="textMultiLine|text"
+                android:singleLine="false"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,7 +60,7 @@
                 android:id="@+id/deletePost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="55dp"
                 android:gravity="center"
                 android:text="@string/deletePostTxt"
                 android:textStyle="italic" />
@@ -59,10 +69,20 @@
                 android:id="@+id/editPost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="@string/editPostTxt"
                 android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/savePost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/saveCaption"
+                android:textStyle="italic"
+                android:visibility="invisible" />
         </LinearLayout>
 
     </LinearLayout>

@@ -3,21 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/drawable-anydpi/ic_comment.xml" value="0.1" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_edit_profile.xml" value="0.13958333333333334" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_home_page.xml" value="0.14673913043478262" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_main.xml" value="0.1140625" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_new_post.xml" value="0.1140625" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_recommendation.xml" value="0.182648401826484" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_starter_application.xml" value="0.13541666666666666" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_user_posts.xml" value="0.10190217391304347" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_view_post.xml" value="0.16666666666666666" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/layout_comment.xml" value="0.14945652173913043" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/layout_post.xml" value="0.3333333333333333" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/layout_recommendation.xml" value="0.10778985507246377" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/post_item.xml" value="0.14673913043478262" />
         <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/menu/main_menu.xml" value="0.11979166666666667" />
-        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/menu/menu_nav.xml" value="0.11458333333333333" />
+        <entry key="..\:/CSIS/Merging3175/app/src/main/res/layout/activity_edit_profile.xml" value="0.284375" />
+        <entry key="..\:/CSIS/Merging3175/app/src/main/res/layout/activity_home_page.xml" value="0.21240942028985507" />
+        <entry key="..\:/CSIS/Merging3175/app/src/main/res/layout/post_item.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/chinj/OneDrive - Douglas College/Desktop/HackHunt/app/src/main/res/layout/activity_main.xml" value="0.3582427536231884" />
         <entry key="..\:/Users/chinj/OneDrive - Douglas College/Desktop/HackHunt/app/src/main/res/layout/activity_new_post.xml" value="0.3795289855072464" />
         <entry key="..\:/Users/chinj/OneDrive - Douglas College/Desktop/HackHunt/app/src/main/res/layout/activity_test.xml" value="0.21875" />
@@ -26,6 +15,17 @@
         <entry key="..\:/Users/chinj/OneDrive - Douglas College/Desktop/HackHunt/app/src/main/res/layout/layout2_post.xml" value="0.2034501642935378" />
         <entry key="..\:/Users/chinj/OneDrive - Douglas College/Desktop/HackHunt/app/src/main/res/layout/layout_post.xml" value="0.34782608695652173" />
         <entry key="..\:/Users/chinj/OneDrive - Douglas College/Desktop/HackHunt/app/src/main/res/menu/main_menu.xml" value="0.38697916666666665" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_comment.xml" value="0.10677083333333333" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_like.xml" value="0.10677083333333333" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/layout/activity_user_posts.xml" value="0.13697916666666668" />
+        <entry key="app/src/main/res/layout/activity_view_post.xml" value="0.13697916666666668" />
+        <entry key="app/src/main/res/layout/layout_comment.xml" value="0.13697916666666668" />
+        <entry key="app/src/main/res/layout/layout_post.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/layout_recommendation.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/post_item.xml" value="0.13855234733514957" />
       </map>
     </option>
   </component>
