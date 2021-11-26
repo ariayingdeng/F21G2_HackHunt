@@ -12,11 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.f21g2_hackhunt.R;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.List;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -50,6 +53,13 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         else {
             ParseQuery<ParseObject> query = new ParseQuery("User");
+            query.whereContains("username",ParseUser.getCurrentUser().getUsername());
+//            query.findInBackground(new FindCallback<ParseObject>() {
+//                @Override
+//                public void done(List<ParseObject> objects, ParseException e) {
+//                    String objectID = .getObjectId();
+//                }
+//            })
             query.getInBackground(currentUser, new GetCallback<ParseObject>() {
                 @Override
                 public void done(ParseObject object, ParseException e) {

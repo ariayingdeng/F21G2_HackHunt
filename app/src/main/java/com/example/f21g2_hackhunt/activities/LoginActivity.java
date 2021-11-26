@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
                         Log.i("Login", "Successful");
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, RecommendationActivity.class);
                         startActivity(intent);
                     }
                     else {

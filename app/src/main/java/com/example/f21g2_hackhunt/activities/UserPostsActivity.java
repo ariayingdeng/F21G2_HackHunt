@@ -61,7 +61,7 @@ public class UserPostsActivity extends MainActivity {
 
                 switch (item.getItemId()) {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         return true;
                     case R.id.recommendation:
                         startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));

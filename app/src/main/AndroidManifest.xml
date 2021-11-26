@@ -22,11 +22,14 @@
             android:name=".activities.RecommendationActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ViewPostActivity"
             android:parentActivityName=".activities.UserPostsActivity" />
         <activity
             android:name=".activities.NewPostActivity"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.UserPostsActivity" />
         <activity
             android:name=".activities.UserPostsActivity"
             android:parentActivityName=".activities.MainActivity" />

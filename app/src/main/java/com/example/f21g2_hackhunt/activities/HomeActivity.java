@@ -51,7 +51,7 @@ public class HomeActivity extends MainActivity {
 
                 switch (item.getItemId()) {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         return true;
                     case R.id.recommendation:
                         startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
@@ -68,8 +68,6 @@ public class HomeActivity extends MainActivity {
             }
         });
     }
-
-
 
     private void getHomePosts() {
         ParseQuery<ParseObject> query = new ParseQuery("Post");
