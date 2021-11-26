@@ -86,6 +86,8 @@ public class NewPostActivity extends MainActivity {
                 object.put("image", file);
                 object.put("caption", caption);
 
+                ParseUser.getCurrentUser().getObjectId();
+
                 object.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {

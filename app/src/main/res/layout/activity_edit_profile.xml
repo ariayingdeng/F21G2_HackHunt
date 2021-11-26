@@ -30,7 +30,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:onClick="clickClose"
-                    android:src="@drawable/ic_close" />
+                    android:src="@drawable/ic_close"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -52,7 +53,8 @@
                     android:onClick="clickSave"
                     android:text="SAVE"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
@@ -65,28 +67,37 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <TextView
+            android:id="@+id/textViewEditProfileTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/userNameEdit"
-            android:hint="Username"
-            android:layout_marginTop="20dp"/>
+            android:text="@string/txtEditProfileTitle"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            android:typeface="sans" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <TextView
+            android:id="@+id/textViewForSpacing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/passwordEdit"
-            android:hint="Password"
-            android:layout_marginTop="20dp"/>
+            android:ems="10"
+            android:hint="@string/txtHintPassword"
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emailEdit"
-            android:hint="Email"
-            android:layout_marginTop="20dp"/>
-
-
+            android:ems="10"
+            android:hint="@string/txtHintEmailAddress"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp" />
     </LinearLayout>
 
 </LinearLayout>

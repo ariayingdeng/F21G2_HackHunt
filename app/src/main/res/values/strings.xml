@@ -16,4 +16,8 @@
     <string name="txtHint2">What do you want to say ?</string>
     <string name="txtComment">Comments</string>
     <string name="recommendationTitle">Life Hacks Show</string>
+    <string name="txtHintUsername">Please Input New Username</string>
+    <string name="txtHintPassword">Please Input New Password</string>
+    <string name="txtHintEmailAddress">Please Input New Email Address</string>
+    <string name="txtEditProfileTitle">You May Update Your Personal Information In The Columns Below</string>
 </resources>
