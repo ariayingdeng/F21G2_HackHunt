@@ -7,11 +7,11 @@
         android:icon="@drawable/ic_homenav"/>
     <item
         android:id="@+id/recommendation"
-        android:title="Recommendation"
-        android:icon="@drawable/ic_recommendationnav"/>
+        android:icon="@drawable/ic_recommendationnav"
+        android:title="Recommendation" />
     <item
         android:id="@+id/myPost"
-        android:title="MyPost"
+        android:title="MyPosts"
         android:icon="@drawable/ic_mypostnav"/>
     <item
         android:id="@+id/newPost"

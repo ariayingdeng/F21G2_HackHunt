@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -28,31 +26,22 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-public class UserPostsActivity extends MainActivity {
-    LinearLayout layoutPosts;
-    String currentUsername;
-    TextView txtViewUsername;
-    protected static Bitmap currentBitmap;
+public class HomeActivity extends UserPostsActivity {
+    LinearLayout layoutHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_posts);
+        setContentView(R.layout.activity_home_page);
 
-        txtViewUsername = findViewById(R.id.txtViewUsername);
-        layoutPosts = findViewById(R.id.layoutPosts);
-
+        layoutHome = findViewById(R.id.layoutHome);
 
         if (ParseUser.getCurrentUser() != null) {
-            currentUsername = ParseUser.getCurrentUser().getUsername();
-            String title = currentUsername + "\'s Page";
-            txtViewUsername.setText(title);
-            getUserPosts();
+            getHomePosts();
         }
         else {
-            startActivity(new Intent(UserPostsActivity.this, LoginActivity.class));
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
         }
-
 
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottomNav5);
@@ -78,13 +67,11 @@ public class UserPostsActivity extends MainActivity {
                 }
             }
         });
-
     }
 
-    private void getUserPosts() {
+    private void getHomePosts() {
         ParseQuery<ParseObject> query = new ParseQuery("Post");
-        query.whereContains("username", currentUsername);
-        query.orderByDescending("timestamp");
+        query.orderByAscending("updatedAt");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -97,43 +84,30 @@ public class UserPostsActivity extends MainActivity {
                             public void done(byte[] data, ParseException e) {
                                 if (e == null && data != null) {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                    View post = getLayoutInflater().inflate(R.layout.layout_post, null, false);
-                                    post.setLayoutParams(new ViewGroup.LayoutParams(
-                                            ViewGroup.LayoutParams.MATCH_PARENT, 400
-                                    ));
-                                    post.setPadding(0,10,0,10);
-                                    ImageView imagePost = post.findViewById(R.id.imgViewPost);
-                                    TextView txtViewDate = post.findViewById(R.id.txtViewDate);
-                                    TextView txtViewCaption = post.findViewById(R.id.txtViewCaption);
-                                    TextView txtViewDelete = post.findViewById(R.id.deletePost);
-
-                                    String postId = object.getObjectId();
-                                    txtViewDelete.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            deleteComments(postId);
-                                            object.deleteInBackground();
-                                            Toast.makeText(UserPostsActivity.this,"Your post has been deleted successfully!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(UserPostsActivity.this, UserPostsActivity.class));
-                                        }
-                                    });
-
+                                    View post = getLayoutInflater().inflate(R.layout.post_item, null, false);
+                                    ImageView imagePost = post.findViewById(R.id.post_image);
+                                    TextView txtViewDate = post.findViewById(R.id.txtViewPostDate);
+                                    TextView txtViewCaption = post.findViewById(R.id.txtViewUserDescription);
+                                    TextView txtUsernameTop = post.findViewById(R.id.txtViewUsernameTop);
+                                    TextView txtUsernameBottom = post.findViewById(R.id.txtViewUsernameBottom);
+                                    String userName = (String) object.get("username");
                                     String caption = (String) object.get("caption");
                                     String date = (String) object.get("timestamp");
+                                    String postId = object.getObjectId();
                                     String simpleDate = date.substring(0, 5);
+                                    txtUsernameTop.setText(userName);
+                                    txtUsernameBottom.setText(userName);
                                     imagePost.setImageBitmap(bitmap);
                                     txtViewDate.setText(simpleDate);
                                     txtViewCaption.setText(caption);
-                                    layoutPosts.addView(post);
-                                    post.setClickable(true);
+                                    layoutHome.addView(post);
 
+                                    post.setClickable(true);
                                     post.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-
-                                            Log.i("Click", date);
+                                            Intent myPost = new Intent(HomeActivity.this, ViewPostActivity.class);
                                             currentBitmap = bitmap;
-                                            Intent myPost = new Intent(UserPostsActivity.this, ViewPostActivity.class);
                                             Bundle bundle = new Bundle();
                                             bundle.putString("DATE", date);
                                             bundle.putString("CAPTION", caption);
@@ -146,21 +120,6 @@ public class UserPostsActivity extends MainActivity {
                                 }
                             }
                         });
-                    }
-                }
-            }
-        });
-    }
-
-    public void deleteComments(String postId) {
-        ParseQuery<ParseObject> query = new ParseQuery("Comment");
-        query.whereEqualTo("postId",postId);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) {
-                    for (ParseObject object : objects) {
-                        object.deleteInBackground();
                     }
                 }
             }

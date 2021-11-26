@@ -11,13 +11,6 @@
         android:layout_margin="5dp"
         android:background="#C3C3C3">
 
-        <TextView
-            android:id="@+id/txtViewDate"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:text="TextView" />
-
         <ImageView
             android:id="@+id/imgViewPost"
             android:layout_width="0dp"
@@ -25,13 +18,53 @@
             android:layout_weight="0.45"
             app:srcCompat="@drawable/breakfast" />
 
-        <TextView
-            android:id="@+id/txtViewCaption"
+        <LinearLayout
+            android:id="@+id/layoutCaption"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.55"
-            android:gravity="center|top"
-            android:text="TextView" />
+            android:layout_weight="0.4"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtViewDate"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/txtViewCaption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutDelete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/deletePost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="@string/deletePostTxt"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/editPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/editPostTxt"
+                android:textStyle="italic" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

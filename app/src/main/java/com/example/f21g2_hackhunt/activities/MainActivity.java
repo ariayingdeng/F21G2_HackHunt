@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         return true;
                     case R.id.recommendation:
+                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
                         return true;
                     case R.id.myPost:
                         startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.profile:
                 Log.i("Selected", "Edit Profile");
+                startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
                 return true;
             case R.id.logout:
                 Log.i("Selected", "Log Out");

@@ -5,39 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAD9CF"
-    tools:context=".activities.UserPostsActivity">
-
-    <TextView
-        android:id="@+id/txtViewUsername"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:background="#F4B4A0"
-        android:fontFamily="serif-monospace"
-        android:paddingLeft="50dp"
-        android:paddingTop="20dp"
-        android:textColor="#761687"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".activities.HomeActivity">
 
     <ScrollView
-        android:id="@+id/scrollViewPosts"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="58dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewUsername"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="SpeakableTextPresentCheck" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/layoutPosts"
+            android:id="@+id/layoutHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
