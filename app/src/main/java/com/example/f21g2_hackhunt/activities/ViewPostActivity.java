@@ -102,6 +102,7 @@ public class ViewPostActivity extends UserPostsActivity {
                 Toast.makeText(this, "Please Input Your Comment", Toast.LENGTH_SHORT).show();
             }
             else{
+
                 try{
                     Log.d("aaa2", commentInput);
                     Comment myComment = new Comment(postId,commentInput,username);
@@ -133,6 +134,7 @@ public class ViewPostActivity extends UserPostsActivity {
 //                });
                 startActivity(new Intent(ViewPostActivity.this,UserPostsActivity.class));
             }
+
         });
     }
 

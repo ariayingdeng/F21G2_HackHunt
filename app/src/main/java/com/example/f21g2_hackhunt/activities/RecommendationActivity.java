@@ -65,7 +65,7 @@ public class RecommendationActivity extends MainActivity {
         addRecommendData();
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
-                "Recommendations.db").build();
+                "HackHunt.db").build();
         RecommendationDao recommendDao = db.recommendationDao();
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
