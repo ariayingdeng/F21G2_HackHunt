@@ -15,8 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.room.Room;
 
 import com.example.f21g2_hackhunt.R;
+import com.example.f21g2_hackhunt.interfaces.PostDao;
+import com.example.f21g2_hackhunt.model.AppDatabase;
+import com.example.f21g2_hackhunt.model.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.parse.FindCallback;
@@ -28,7 +32,15 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class UserPostsActivity extends MainActivity {
     LinearLayout layoutPosts;
@@ -40,6 +52,13 @@ public class UserPostsActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_posts);
+
+        List<Post> postsList = readCSVPosts();
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "HackHunt.db").build();
+        PostDao postDao = db.postDao();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> postDao.insertPostsList(postsList));
 
         txtViewUsername = findViewById(R.id.txtViewUsername);
         layoutPosts = findViewById(R.id.layoutPosts);
@@ -84,6 +103,10 @@ public class UserPostsActivity extends MainActivity {
     }
 
     private void getUserPosts() {
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "HackHunt.db").build();
+        PostDao postDao = db.postDao();
+
         ParseQuery<ParseObject> query = new ParseQuery("Post");
         query.whereContains("username", currentUsername);
         query.orderByDescending("timestamp");
@@ -119,6 +142,16 @@ public class UserPostsActivity extends MainActivity {
                                         public void onClick(View v) {
                                             deleteComments(postId);
                                             object.deleteInBackground();
+
+                                            ExecutorService executor = Executors.newSingleThreadExecutor();
+                                            executor.execute(() -> {
+                                                try {
+                                                    postDao.deletePost(postId);
+                                                } catch (Exception ex) {
+                                                    Log.d("DBEX","DB exception occured: " + ex.getMessage());
+                                                }
+                                            });
+
                                             Toast.makeText(UserPostsActivity.this,"Your post has been deleted successfully!", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(UserPostsActivity.this, UserPostsActivity.class));
                                         }
@@ -137,7 +170,7 @@ public class UserPostsActivity extends MainActivity {
                                         public void onClick(View v) {
                                             String newCaption = editTxtCaption.getText().toString();
                                             txtViewCaption.setText(newCaption);
-                                            editPostCaption(postId, newCaption);
+                                            editPostCaption(postId, newCaption, postDao);
                                             Toast.makeText(UserPostsActivity.this,"Your post has been updated successfully!", Toast.LENGTH_SHORT).show();
                                             editTxtCaption.setVisibility(View.INVISIBLE);
                                             txtViewSave.setVisibility(View.INVISIBLE);
@@ -193,7 +226,10 @@ public class UserPostsActivity extends MainActivity {
         });
     }
 
-    public void editPostCaption(String postId, String newCaption) {
+    public void editPostCaption(String postId, String newCaption, PostDao postDao) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> postDao.updateCaption(newCaption, postId));
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Post");
         query.getInBackground(postId, new GetCallback<ParseObject>() {
             public void done(ParseObject ePost, ParseException e) {
@@ -203,6 +239,31 @@ public class UserPostsActivity extends MainActivity {
                 }
             }
         });
+    }
+
+    private List<Post> readCSVPosts() {
+        List<Post> postsList = new ArrayList<>();
+        InputStream inputStream = getResources().openRawResource(R.raw.existingpostslist);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            String csvPostLine = reader.readLine();
+            while ((csvPostLine = reader.readLine()) != null) {
+                String[] eachPostLine = csvPostLine.split(",");
+                Post eachPost = new Post(eachPostLine[0], eachPostLine[3], eachPostLine[2], eachPostLine[1]);
+
+                postsList.add(eachPost);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading CSV file " + e.getMessage());
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException("Error closing stream..." + e.getMessage());
+            }
+        }
+
+        return postsList;
     }
 
 }

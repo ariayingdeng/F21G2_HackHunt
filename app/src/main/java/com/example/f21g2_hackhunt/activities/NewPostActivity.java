@@ -5,12 +5,14 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.f21g2_hackhunt.R;
+import com.example.f21g2_hackhunt.interfaces.PostDao;
+import com.example.f21g2_hackhunt.model.AppDatabase;
+import com.example.f21g2_hackhunt.model.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.parse.ParseException;
@@ -29,6 +34,9 @@ import com.parse.SaveCallback;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class NewPostActivity extends MainActivity {
 
@@ -86,11 +94,20 @@ public class NewPostActivity extends MainActivity {
 
                 ParseUser.getCurrentUser().getObjectId();
 
+                Post newPost = new Post();
+                newPost.setCaption(caption);
+                newPost.setUsername(currentUsername);
+                newPost.setPostTime(date);
+
                 object.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
                             Toast.makeText(NewPostActivity.this, "Your post has been shared", Toast.LENGTH_SHORT).show();
+                            String postId = object.getObjectId();
+                            Log.i("OBID", postId);
+                            newPost.setPostId(postId);
+                            savePostInDB(newPost);
                             startActivity(new Intent(NewPostActivity.this, UserPostsActivity.class));
                         } else {
                             Toast.makeText(NewPostActivity.this, "Issue sharing your post", Toast.LENGTH_SHORT).show();
@@ -131,4 +148,23 @@ public class NewPostActivity extends MainActivity {
         });
 
     }
+
+    public void savePostInDB(Post post) {
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "HackHunt.db").build();
+        PostDao postDao = db.postDao();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    postDao.insertPost(post);
+                } catch (Exception ex) {
+                    Log.d("DBEX","DB exception occured: " + ex.getMessage());
+                }
+            }
+        });
+    }
+
+
 }
