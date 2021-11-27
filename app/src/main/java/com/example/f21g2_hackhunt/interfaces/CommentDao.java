@@ -15,7 +15,7 @@ public interface CommentDao {
     void insertComment(Comment comment);
 
     @Insert(onConflict = IGNORE)
-    void insertCommentList(List<Comment> comment);
+    void insertCommentList(List<Comment> comments);
 
     @Query("SELECT * FROM comments WHERE postId = :pId")
     List<Comment> getAllCommentsForPost(String pId);

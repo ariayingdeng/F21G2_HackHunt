@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.room.Room;
 
 import com.example.f21g2_hackhunt.R;
@@ -22,7 +20,6 @@ import com.example.f21g2_hackhunt.interfaces.PostDao;
 import com.example.f21g2_hackhunt.model.AppDatabase;
 import com.example.f21g2_hackhunt.model.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
@@ -36,7 +33,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -77,26 +73,23 @@ public class UserPostsActivity extends MainActivity {
 
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottomNav5);
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        bottomNavigationView.setOnItemSelectedListener(item -> {
 
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                        return true;
-                    case R.id.recommendation:
-                        startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
-                        return true;
-                    case R.id.myPost:
-                        startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
-                        return true;
-                    case R.id.newPost:
-                        startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
-                        return true;
-                    default:
-                        return false;
-                }
+            switch (item.getItemId()) {
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    return true;
+                case R.id.recommendation:
+                    startActivity(new Intent(getApplicationContext(), RecommendationActivity.class));
+                    return true;
+                case R.id.myPost:
+                    startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
+                    return true;
+                case R.id.newPost:
+                    startActivity(new Intent(getApplicationContext(), NewPostActivity.class));
+                    return true;
+                default:
+                    return false;
             }
         });
 
@@ -206,21 +199,6 @@ public class UserPostsActivity extends MainActivity {
         });
     }
 
-//    public void deleteComments(String postId, AppDatabase db) {
-////        ParseQuery<ParseObject> query = new ParseQuery("Comment");
-////        query.whereEqualTo("postId",postId);
-////        query.findInBackground(new FindCallback<ParseObject>() {
-////            @Override
-////            public void done(List<ParseObject> objects, ParseException e) {
-////                if (e == null) {
-////                    for (ParseObject object : objects) {
-////                        object.deleteInBackground();
-////                    }
-////                }
-////            }
-////        });
-//        db.commentDao().deleteComments(postId);
-//    }
 
     public void editPostCaption(String postId, String newCaption, PostDao postDao) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -236,6 +214,7 @@ public class UserPostsActivity extends MainActivity {
             }
         });
     }
+
 
     private List<Post> readCSVPosts() {
         List<Post> postsList = new ArrayList<>();
