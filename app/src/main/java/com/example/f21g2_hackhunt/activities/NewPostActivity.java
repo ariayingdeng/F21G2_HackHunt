@@ -97,7 +97,6 @@ public class NewPostActivity extends MainActivity {
                         }
                     }
                 });
-                startActivity(new Intent(NewPostActivity.this, UserPostsActivity.class));
             }
             catch(Exception e){
                 e.printStackTrace();

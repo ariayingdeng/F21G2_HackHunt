@@ -77,14 +77,13 @@ public class ViewPostActivity extends UserPostsActivity {
                     public void done(ParseException e) {
                         if(e == null){
                             Toast.makeText(ViewPostActivity.this,"Your comment shared",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                         }else{
                             Toast.makeText(ViewPostActivity.this,"Issue sharing your comment",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                startActivity(new Intent(ViewPostActivity.this,UserPostsActivity.class));
             }
-
 
         });
 
