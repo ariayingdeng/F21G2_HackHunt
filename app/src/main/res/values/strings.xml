@@ -23,5 +23,6 @@
     <string name="editPostTxt">Edit</string>
     <string name="editCaptionHint">Write a caption...</string>
     <string name="saveCaption">Save</string>
+    <string name="txtInitital0comment">0 Comment</string>
 
 </resources>

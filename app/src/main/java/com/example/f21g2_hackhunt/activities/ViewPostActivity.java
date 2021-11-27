@@ -18,6 +18,10 @@ import android.widget.Toast;
 import com.example.f21g2_hackhunt.adapters.CommentAdapter;
 
 
+import com.example.f21g2_hackhunt.adapters.CommentAdapterForSql;
+import com.example.f21g2_hackhunt.interfaces.CommentDao;
+import com.example.f21g2_hackhunt.model.AppDatabase;
+import com.example.f21g2_hackhunt.model.Comment;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -27,12 +31,13 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import androidx.annotation.NonNull;
+import androidx.room.Room;
 
 import com.example.f21g2_hackhunt.R;
-
-
 
 public class ViewPostActivity extends UserPostsActivity {
 
@@ -59,34 +64,78 @@ public class ViewPostActivity extends UserPostsActivity {
         txtViewCapL.setText(caption);
 
         commentPostButton.setImageResource(R.drawable.ic_commentarrow);
-        parseQuery(postId);
+//        parseQuery(postId);
+
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
+                "Recommendations.db").build();
+        CommentDao commentDao = db.commentDao();
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try{
+                if(postId != null){
+                    List<Comment> commentList = commentDao.getAllCommentsForPost(postId);
+                    Log.d("aaaa",commentList.get(0).getComments());
+                    CommentAdapterForSql commentAdapterForSql = new CommentAdapterForSql(commentList);
+                    TextView commentTitleCount = findViewById(R.id.textViewCommentTitle);
+                    ListView listViewComments = findViewById(R.id.listViewComments);
+                    int comCount = commentAdapterForSql.getCount();
+                    if(comCount==1){
+                        commentTitleCount.setText(1+" Comment");
+                    }
+                    else{
+                        commentTitleCount.setText(comCount+" Comments");
+                    }
+                    listViewComments.setAdapter(commentAdapterForSql);
+                }
+            }
+            catch (Exception e) {
+                Log.d("DBcomment", "Database exception occurred: " + e.getMessage());
+            }
+        });
 
         commentPostButton.setOnClickListener((View view) -> {
             String commentInput = commentText.getText().toString();
+            String username = ParseUser.getCurrentUser().getUsername();
+            Log.d("aaa1", commentInput);
             if(commentInput.equals("")){
                 Toast.makeText(this, "Please Input Your Comment", Toast.LENGTH_SHORT).show();
             }
             else{
-                ParseObject object = new ParseObject("Comment");
-                String username = ParseUser.getCurrentUser().getUsername();
-                object.put("postId",postId);
-                object.put("comments", commentInput);
-                object.put("commenter", username);
-                object.saveInBackground(new SaveCallback(){
-                    @Override
-                    public void done(ParseException e) {
-                        if(e == null){
-                            Toast.makeText(ViewPostActivity.this,"Your comment shared",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                        }else{
-                            Toast.makeText(ViewPostActivity.this,"Issue sharing your comment",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
+                try{
+                    Log.d("aaa2", commentInput);
+                    Comment myComment = new Comment(postId,commentInput,username);
+                    ExecutorService executor1 = Executors.newSingleThreadExecutor();
+                    executor1.execute(()->{
+                        commentDao.insertComment(myComment);
+                    });
+                    Toast.makeText(this, "Your comment is shared", Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception e){
+                    Log.d("DBcomment","Database exception occurred: " + e.getMessage());
+                }
+
+
+                // For Parse
+//                ParseObject object = new ParseObject("Comment");
+//                object.put("postId",postId);
+//                object.put("comments", commentInput);
+//                object.put("commenter", username);
+//                object.saveInBackground(new SaveCallback(){
+//                    @Override
+//                    public void done(ParseException e) {
+//                        if(e == null){
+//                            Toast.makeText(ViewPostActivity.this,"Your comment is shared",Toast.LENGTH_SHORT).show();
+//                        }else{
+//                            Toast.makeText(ViewPostActivity.this,"Issue sharing your comment",Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+                startActivity(new Intent(ViewPostActivity.this,UserPostsActivity.class));
             }
 
         });
-
     }
 
     private void parseQuery(String postId) {
@@ -121,4 +170,6 @@ public class ViewPostActivity extends UserPostsActivity {
         });
 
     }
+
+
 }
