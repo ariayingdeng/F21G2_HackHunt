@@ -137,24 +137,20 @@ public class UserPostsActivity extends MainActivity {
 
                                     String postId = object.getObjectId();
 
-                                    txtViewDelete.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            deleteComments(postId);
-                                            object.deleteInBackground();
+                                    txtViewDelete.setOnClickListener(v -> {
+                                        ExecutorService executor = Executors.newSingleThreadExecutor();
+                                        executor.execute(() -> {
+                                            try {
+                                                db.commentDao().deleteComments(postId);
+                                                db.postDao().deletePost(postId);
+                                                object.deleteInBackground();
+                                            } catch (Exception ex) {
+                                                Log.d("DBEX","DB exception occured: " + ex.getMessage());
+                                            }
+                                        });
 
-                                            ExecutorService executor = Executors.newSingleThreadExecutor();
-                                            executor.execute(() -> {
-                                                try {
-                                                    postDao.deletePost(postId);
-                                                } catch (Exception ex) {
-                                                    Log.d("DBEX","DB exception occured: " + ex.getMessage());
-                                                }
-                                            });
-
-                                            Toast.makeText(UserPostsActivity.this,"Your post has been deleted successfully!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(UserPostsActivity.this, UserPostsActivity.class));
-                                        }
+                                        Toast.makeText(UserPostsActivity.this,"Your post has been deleted successfully!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
                                     });
 
                                     txtViewEdit.setOnClickListener(new View.OnClickListener() {
@@ -186,7 +182,6 @@ public class UserPostsActivity extends MainActivity {
                                     layoutPosts.addView(post);
 
                                     post.setClickable(true);
-
                                     post.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -211,20 +206,21 @@ public class UserPostsActivity extends MainActivity {
         });
     }
 
-    public void deleteComments(String postId) {
-        ParseQuery<ParseObject> query = new ParseQuery("Comment");
-        query.whereEqualTo("postId",postId);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) {
-                    for (ParseObject object : objects) {
-                        object.deleteInBackground();
-                    }
-                }
-            }
-        });
-    }
+//    public void deleteComments(String postId, AppDatabase db) {
+////        ParseQuery<ParseObject> query = new ParseQuery("Comment");
+////        query.whereEqualTo("postId",postId);
+////        query.findInBackground(new FindCallback<ParseObject>() {
+////            @Override
+////            public void done(List<ParseObject> objects, ParseException e) {
+////                if (e == null) {
+////                    for (ParseObject object : objects) {
+////                        object.deleteInBackground();
+////                    }
+////                }
+////            }
+////        });
+//        db.commentDao().deleteComments(postId);
+//    }
 
     public void editPostCaption(String postId, String newCaption, PostDao postDao) {
         ExecutorService executor = Executors.newSingleThreadExecutor();

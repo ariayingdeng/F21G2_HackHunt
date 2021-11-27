@@ -7,34 +7,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import android.view.MenuItem;
-
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.f21g2_hackhunt.adapters.CommentAdapter;
-
 
 import com.example.f21g2_hackhunt.adapters.CommentAdapterForSql;
 import com.example.f21g2_hackhunt.interfaces.CommentDao;
 import com.example.f21g2_hackhunt.model.AppDatabase;
 import com.example.f21g2_hackhunt.model.Comment;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import androidx.annotation.NonNull;
 import androidx.room.Room;
 
 import com.example.f21g2_hackhunt.R;
@@ -67,7 +55,7 @@ public class ViewPostActivity extends UserPostsActivity {
 //        parseQuery(postId);
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
-                "Recommendations.db").build();
+                "HackHunt.db").build();
         CommentDao commentDao = db.commentDao();
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -75,17 +63,10 @@ public class ViewPostActivity extends UserPostsActivity {
             try{
                 if(postId != null){
                     List<Comment> commentList = commentDao.getAllCommentsForPost(postId);
-                    Log.d("aaaa",commentList.get(0).getComments());
                     CommentAdapterForSql commentAdapterForSql = new CommentAdapterForSql(commentList);
                     TextView commentTitleCount = findViewById(R.id.textViewCommentTitle);
                     ListView listViewComments = findViewById(R.id.listViewComments);
-                    int comCount = commentAdapterForSql.getCount();
-                    if(comCount==1){
-                        commentTitleCount.setText(1+" Comment");
-                    }
-                    else{
-                        commentTitleCount.setText(comCount+" Comments");
-                    }
+                    commentTitleCount.setText(commentList.size() + " Comment");
                     listViewComments.setAdapter(commentAdapterForSql);
                 }
             }
@@ -115,6 +96,9 @@ public class ViewPostActivity extends UserPostsActivity {
                 catch (Exception e){
                     Log.d("DBcomment","Database exception occurred: " + e.getMessage());
                 }
+                finally {
+                    startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                }
 
 
                 // For Parse
@@ -132,44 +116,43 @@ public class ViewPostActivity extends UserPostsActivity {
 //                        }
 //                    }
 //                });
-                startActivity(new Intent(ViewPostActivity.this,UserPostsActivity.class));
             }
 
         });
     }
 
-    private void parseQuery(String postId) {
-        ParseQuery<ParseObject> query = new ParseQuery("Comment");
-        query.whereEqualTo("postId",postId);
-        query.orderByDescending("createdAt");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                List<String> CommentsList = new ArrayList<>();
-                List<String> CommenterList = new ArrayList<>();
-                TextView commentTitleCount = findViewById(R.id.textViewCommentTitle);
-                ListView listViewComments = findViewById(R.id.listViewComments);
-                if (objects.size() > 0 && e == null) {
-                    for (ParseObject object : objects) {
-                        String comment = (String) object.get("comments");
-                        String commenter = (String) object.get("commenter");
-                        CommentsList.add(comment);
-                        CommenterList.add(commenter);
-                    }
-                }
-                CommentAdapter myCommentAdapter = new CommentAdapter(CommentsList,CommenterList);
-                int comCount = myCommentAdapter.getCount();
-                if(comCount<=1){
-                    commentTitleCount.setText(comCount+" Comment");
-                }
-                else{
-                    commentTitleCount.setText(comCount+" Comments");
-                }
-                listViewComments.setAdapter(myCommentAdapter);
-            }
-        });
-
-    }
+//    private void parseQuery(String postId) {
+//        ParseQuery<ParseObject> query = new ParseQuery("Comment");
+//        query.whereEqualTo("postId",postId);
+//        query.orderByDescending("createdAt");
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> objects, ParseException e) {
+//                List<String> CommentsList = new ArrayList<>();
+//                List<String> CommenterList = new ArrayList<>();
+//                TextView commentTitleCount = findViewById(R.id.textViewCommentTitle);
+//                ListView listViewComments = findViewById(R.id.listViewComments);
+//                if (objects.size() > 0 && e == null) {
+//                    for (ParseObject object : objects) {
+//                        String comment = (String) object.get("comments");
+//                        String commenter = (String) object.get("commenter");
+//                        CommentsList.add(comment);
+//                        CommenterList.add(commenter);
+//                    }
+//                }
+//                CommentAdapter myCommentAdapter = new CommentAdapter(CommentsList,CommenterList);
+//                int comCount = myCommentAdapter.getCount();
+//                if(comCount<=1){
+//                    commentTitleCount.setText(comCount+" Comment");
+//                }
+//                else{
+//                    commentTitleCount.setText(comCount+" Comments");
+//                }
+//                listViewComments.setAdapter(myCommentAdapter);
+//            }
+//        });
+//
+//    }
 
 
 }

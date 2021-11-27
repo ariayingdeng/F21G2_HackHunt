@@ -20,5 +20,6 @@ public interface CommentDao {
     @Query("SELECT * FROM comments WHERE postId = :pId")
     List<Comment> getAllCommentsForPost(String pId);
 
-
+    @Query("DELETE FROM comments WHERE postId = :poId")
+    int deleteComments(String poId);
 }
