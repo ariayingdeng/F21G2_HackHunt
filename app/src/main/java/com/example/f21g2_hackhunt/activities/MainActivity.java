@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.example.f21g2_hackhunt.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
@@ -51,22 +50,6 @@ public class MainActivity extends AppCompatActivity {
                     return false;
             }
         });
-
-//        ParseObject parseObject = new ParseObject("Test");
-//        parseObject.put("Firstname", "Ying");
-//        parseObject.put("Lastname", "Deng");
-//        parseObject.saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e == null) {
-//                    Log.i("Connection", "Successful");
-//                }
-//                else {
-//                    Log.i("Connection", "Unsuccessful");
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }

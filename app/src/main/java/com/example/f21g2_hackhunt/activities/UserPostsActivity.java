@@ -146,24 +146,18 @@ public class UserPostsActivity extends MainActivity {
                                         startActivity(new Intent(getApplicationContext(), UserPostsActivity.class));
                                     });
 
-                                    txtViewEdit.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            editTxtCaption.setVisibility(View.VISIBLE);
-                                            txtViewSave.setVisibility(View.VISIBLE);
-                                        }
+                                    txtViewEdit.setOnClickListener(v -> {
+                                        editTxtCaption.setVisibility(View.VISIBLE);
+                                        txtViewSave.setVisibility(View.VISIBLE);
                                     });
 
-                                    txtViewSave.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            String newCaption = editTxtCaption.getText().toString();
-                                            txtViewCaption.setText(newCaption);
-                                            editPostCaption(postId, newCaption, postDao);
-                                            Toast.makeText(UserPostsActivity.this,"Your post has been updated successfully!", Toast.LENGTH_SHORT).show();
-                                            editTxtCaption.setVisibility(View.INVISIBLE);
-                                            txtViewSave.setVisibility(View.INVISIBLE);
-                                        }
+                                    txtViewSave.setOnClickListener(v -> {
+                                        String newCaption = editTxtCaption.getText().toString();
+                                        txtViewCaption.setText(newCaption);
+                                        editPostCaption(postId, newCaption, postDao);
+                                        Toast.makeText(UserPostsActivity.this,"Your post has been updated successfully!", Toast.LENGTH_SHORT).show();
+                                        editTxtCaption.setVisibility(View.INVISIBLE);
+                                        txtViewSave.setVisibility(View.INVISIBLE);
                                     });
 
                                     String caption = (String) object.get("caption");
@@ -175,20 +169,17 @@ public class UserPostsActivity extends MainActivity {
                                     layoutPosts.addView(post);
 
                                     post.setClickable(true);
-                                    post.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
+                                    post.setOnClickListener(v -> {
 
-                                            Log.i("Click", date);
-                                            currentBitmap = bitmap;
-                                            Intent myPost = new Intent(UserPostsActivity.this, ViewPostActivity.class);
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString("DATE", date);
-                                            bundle.putString("CAPTION", caption);
-                                            bundle.putString("postId", postId);
-                                            myPost.putExtras(bundle);
-                                            startActivity(myPost);
-                                        }
+                                        Log.i("Click", date);
+                                        currentBitmap = bitmap;
+                                        Intent myPost = new Intent(UserPostsActivity.this, ViewPostActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("DATE", date);
+                                        bundle.putString("CAPTION", caption);
+                                        bundle.putString("postId", postId);
+                                        myPost.putExtras(bundle);
+                                        startActivity(myPost);
                                     });
                                 }
                             }

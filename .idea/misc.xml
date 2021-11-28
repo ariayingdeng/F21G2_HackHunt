@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_main.xml" value="0.12907608695652173" />
+        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_recommendation.xml" value="0.15217391304347827" />
+        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_user_posts.xml" value="0.12907608695652173" />
+        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/activity_view_post.xml" value="0.12907608695652173" />
+        <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/layout/layout_post.xml" value="0.12907608695652173" />
         <entry key="..\:/CSIS/Fall2021/3175_003/CSIS3175/F21G2_HackHunt/app/src/main/res/menu/main_menu.xml" value="0.11979166666666667" />
         <entry key="..\:/CSIS/Merging3175/app/src/main/res/layout/activity_edit_profile.xml" value="0.284375" />
         <entry key="..\:/CSIS/Merging3175/app/src/main/res/layout/activity_home_page.xml" value="0.21240942028985507" />
