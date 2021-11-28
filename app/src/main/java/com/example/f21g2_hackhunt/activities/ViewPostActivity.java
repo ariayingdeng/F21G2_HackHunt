@@ -60,7 +60,12 @@ public class ViewPostActivity extends UserPostsActivity {
                     CommentAdapterForSql commentAdapterForSql = new CommentAdapterForSql(commentList);
                     TextView commentTitleCount = findViewById(R.id.textViewCommentTitle);
                     ListView listViewComments = findViewById(R.id.listViewComments);
-                    commentTitleCount.setText(commentList.size() + " Comment");
+                    if(commentList.size()<=1){
+                        commentTitleCount.setText(commentList.size() + " Comment");
+                    }
+                    else {
+                        commentTitleCount.setText(commentList.size() + " Comments");
+                    }
                     listViewComments.setAdapter(commentAdapterForSql);
                 }
             }
